@@ -28,14 +28,13 @@ export default function MacbookModel14(props) {
     scene.traverse((child) => {
       if (child.isMesh) {
         //Change color only if the part name is NOT noChangeParts
-        if (child.isMesh) {
-          if (!noChangeParts.includes(child.name)) {
-            child.material.color = new Color(color);
-          }
+
+        if (!noChangeParts.includes(child.name)) {
+          child.material.color = new Color(color);
         }
       }
     });
-  }, [color]);
+  }, [color, scene]);
   return (
     <group {...props} dispose={null}>
       <mesh
