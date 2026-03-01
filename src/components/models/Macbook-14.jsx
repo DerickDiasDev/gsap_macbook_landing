@@ -26,6 +26,10 @@ export default function MacbookModel14(props) {
     scene.traverse((child) => {
       if (child.isMesh) {
         if (!noChangeParts.includes(child.name)) {
+          if (!child.material.userData.cloned) {
+            child.material = child.material.clone();
+            child.material.userData.cloned = true;
+          }
           child.material.color = new Color(color);
         }
       }

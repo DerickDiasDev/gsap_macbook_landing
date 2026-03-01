@@ -3,8 +3,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 const Showcase = () => {
-  const isTablet = useMediaQuery({ query: "(max-width: 1024px" });
-
+  const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });
   useGSAP(() => {
     if (!isTablet) {
       const timeline = gsap.timeline({
@@ -66,12 +65,12 @@ const Showcase = () => {
             <div className="space-y-2">
               <p>Up to </p>
               <h3>4x Faster</h3>
-              <p>pro rendering perfomance than M2</p>
+              <p>pro rendering performance than M2</p>
             </div>
             <div className="space-y-2">
               <p>Up to </p>
               <h3>1.5x Faster</h3>
-              <p>CPU perfomance than M2</p>
+              <p>CPU performance than M2</p>
             </div>
           </div>
         </div>
