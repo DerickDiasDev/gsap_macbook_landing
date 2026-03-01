@@ -12,7 +12,7 @@ import React, { useEffect } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 import useMacbookStore from "../../store";
 import { noChangeParts } from "../../constants/index.js";
-import { Color } from "three";
+import { Color, SRGBColorSpace } from "three";
 
 export default function MacbookModel16(props) {
   const { color } = useMacbookStore();
@@ -21,20 +21,21 @@ export default function MacbookModel16(props) {
   );
 
   const texture = useTexture("/screen.png");
+  texture.colorSpace = SRGBColorSpace;
+  texture.needsUpdate = true;
 
   useEffect(() => {
     scene.traverse((child) => {
       if (child.isMesh) {
-        if (!noChangeParts.includes(child.name)) {
-          if (!child.material.userData.cloned) {
-            child.material = child.material.clone();
-            child.material.userData.cloned = true;
+        //Change color only if the part name is NOT noChangeParts
+        if (child.isMesh) {
+          if (!noChangeParts.includes(child.name)) {
+            child.material.color = new Color(color);
           }
-          child.material.color = new Color(color);
         }
       }
     });
-  }, [color, scene]);
+  }, [color]);
   return (
     <group {...props} dispose={null}>
       <mesh
